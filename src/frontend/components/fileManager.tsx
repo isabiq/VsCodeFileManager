@@ -4,7 +4,7 @@ import classNames from "classnames-ts";
 import { ClientElementInfoMessage, ClientGoToDirMessage, ClientOpenFileMessage, ClientResolveSymlinkType } from "../../types/ClientMessage";
 import { ElementInfo, ElementType } from "../../types/ElementInfo";
 
-import { vscodeClient } from "../../vscode-api/client/client";
+import { vscodeClient } from "../../vscode-api/client/Client";
 import { uris } from "../../constants";
 import { DirContentDescription, ElementContentInfo } from "../../types/ServerMessage";
 

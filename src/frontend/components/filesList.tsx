@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ElementInfo } from "../../types/ElementInfo";
 
@@ -18,7 +18,10 @@ interface Props {
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const FilesList = ({elementsList, active}: Props) => {
+export const FilesList = ({ elementsList, active }: Props) => {
+  const listRef = useRef(null);
+  const selectedItemRef = useRef(null);
+
   const [selected, setSelected] = useState<number | undefined>(active?.selected);
 
   const setSelectedWithUpdate = useCallback((index: number, newElementsList?: ElementInfo[]) => {
@@ -28,18 +31,34 @@ export const FilesList = ({elementsList, active}: Props) => {
   }, [setSelected, elementsList]);
 
   function onHoverElement(index) {
-    setSelectedWithUpdate(index);
+    // setSelectedWithUpdate(index); TODO
   };
 
   if (active !== undefined) {
     const onKeyPressEvent = (event: KeyboardEvent) => {
-      if (event.code === "ArrowDown") {     
-        event.preventDefault();   
-        elementsList && setSelectedWithUpdate((elementsList.length + selected + 1) % elementsList.length);
+      const container = listRef.current;
+      const selectedItem = selectedItemRef.current;
+      const elementTop = selectedItem.offsetTop;
+      const elementHeight = selectedItem.offsetHeight;
+      const containerTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      if (event.code === "ArrowDown") {
+        if (selected + 1 < elementsList.length) {
+          event.preventDefault();
+          elementsList && setSelectedWithUpdate(selected + 1);
+          if (elementTop + elementHeight > containerTop + containerHeight) {
+            container.scrollTop = elementTop - containerHeight;
+          }
+        }
       }
       if (event.code === "ArrowUp") {
-        event.preventDefault();
-        elementsList && setSelectedWithUpdate((elementsList.length + selected - 1) % elementsList.length);
+        if (selected - 1 >= 0) {
+          event.preventDefault();
+          elementsList && setSelectedWithUpdate(selected - 1);
+          if (elementTop - 5 * elementHeight < containerTop) {
+            container.scrollTop = elementTop - 4 * elementHeight;
+          }
+        }
       }
       if (event.code === "ArrowLeft") {
         if (elementsList[0].name === LVL_UP_DIR) {
@@ -47,7 +66,7 @@ export const FilesList = ({elementsList, active}: Props) => {
         }
       }
       if (event.code === "ArrowRight" && elementsList[selected].name !== LVL_UP_DIR ||
-          event.code === "Enter") {
+        event.code === "Enter") {
         active.onClickElement(elementsList[selected]);
       }
     };
@@ -63,7 +82,7 @@ export const FilesList = ({elementsList, active}: Props) => {
     }, [elementsList]);
   }
 
-  const getElementProps = (element : ElementInfo, index: number) => {
+  const getElementProps = (element: ElementInfo, index: number) => {
     return active ? {
       onClick: () => {
         active.onClickElement(element);
@@ -73,10 +92,10 @@ export const FilesList = ({elementsList, active}: Props) => {
       },
     } : {};
   };
-  
+
   return (
-    <div className={classNames("filesList", "col-2")}>
-      <ul>
+    <div ref={listRef} className={classNames("filesList", "col-2")}>
+      <ul >
         {elementsList && elementsList.length > 0 && elementsList.map(
           (element, index) => {
             const className = getElementStyle(
@@ -85,12 +104,12 @@ export const FilesList = ({elementsList, active}: Props) => {
                 selected: selected === index,
               }
             );
-            return <li
-                key={element.name}
-                className={className}
-                {...getElementProps(element, index)}
-              >{getIcon(element.type)} {element.name}</li>;
-            }
+            return <li ref={selected === index ? selectedItemRef : null}
+              key={element.name}
+              className={className}
+              {...getElementProps(element, index)}
+            >{getIcon(element.type)} {element.name} {element.temp}</li>;
+          }
         )}
       </ul>
     </div>

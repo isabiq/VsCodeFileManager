@@ -35,6 +35,43 @@
         "category": "FileManager"
       }
     ],
+    "configuration": {
+      "title": "fileManager",
+      "type": "object",
+      "properties": {
+        "fileManager": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "title": "test test",
+            "properties": {
+              "maxSize": {
+                "type": "number",
+                "default": "5242880"
+              },
+              "maxCharacters": {
+                "type": "number",
+                "default": "1000000"
+              },
+              "excludeExtensions": {
+                "type": "array",
+                "default": [
+                  ".zip",
+                  ".gz",
+                  ".xz",
+                  ".tgz",
+                  ".deb",
+                  ".pdf",
+                  ".docx",
+                  ".epub",
+                  ".mp4"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "viewsWelcome": [
       {
         "view": "workbench.explorer.emptyView",
@@ -71,9 +108,10 @@
     "mocha": "^8.1.3",
     "node-sass": "^7.0.1",
     "prettier": "^2.7.1",
+    "pretty-bytes": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.2",
+    "react-redux": "^8.0.5",
     "react-scripts": "^5.0.1",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",

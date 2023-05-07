@@ -1,4 +1,4 @@
-import { Server } from "../../vscode-api/server/server";
+import { Server } from "../../vscode-api/server/Server";
 
 export interface InstanceState {
     server: Server;

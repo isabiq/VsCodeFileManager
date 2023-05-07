@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Method } from '../common/method';
+import { Method } from '../common/Method';
 import { Request } from '../common/Request';
 import { Response } from '../common/Response';
 

@@ -8,7 +8,7 @@
 }
 
 body, h1, h2, h3, h4, p, a, li, ul, ol, input, button {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Merriweather', monospace;
     /* font-family: monospace; */
     margin: 0;
     /* font-size: 90%; */
@@ -121,6 +121,16 @@ a:hover, a:focus {
 
 .file-content {
     white-space: pre-wrap;
+}
+
+
+.size {
+    font-weight: 800;
+    color: #7FFF00;
+}
+
+.metaData-content {
+    margin-bottom: 6px;
 }
 
 .path-button {

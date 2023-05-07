@@ -15,6 +15,11 @@ export interface DirectoryInfo {
 
 export interface FileInfo {
     data: string;
+    metaData?: MetaData
+};
+
+export interface MetaData {
+  size: number;
 };
 
 export interface ElementContentInfo {

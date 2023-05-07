@@ -1,8 +1,12 @@
 {
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/*.spec.ts"],
 	"compilerOptions": {
 		"target": "es6",
 		"outDir": "out",
 		"jsx": "react-jsx",
+		"sourceMap": true,
+		//"allowJs": true,
 		"lib": [
 			"dom",
 		],
@@ -26,7 +30,7 @@
 		// // "noUnusedParameters": true,  /* Report errors on unused parameters. */
 		// "jsx": "react-jsx",
 		// "allowJs": true,
-		// "skipLibCheck": true,
+		//"skipLibCheck": true,
 		// "esModuleInterop": true,
 		// "allowSyntheticDefaultImports": true,
 		// "forceConsistentCasingInFileNames": true,

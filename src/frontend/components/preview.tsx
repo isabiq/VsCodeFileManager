@@ -13,7 +13,7 @@ export const Preview = ( { type, content }: ElementContentInfo) => {
                 />
             }
             {type === "File" &&
-                <FileContent content={(content as FileInfo).data}/>
+                <FileContent content={(content as FileInfo)}/>
             }
         </>
     );

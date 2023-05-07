@@ -1,7 +1,7 @@
 import classNames from "classnames-ts";
 import { uris } from "../../constants";
 import { DirContentDescription } from "../../types/ServerMessage";
-import { vscodeClient } from "../../vscode-api/client/client";
+import { vscodeClient } from "../../vscode-api/client/Client";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const PathString = (props: {path: string, goToDirResponseCallback: (data: DirContentDescription) => void}) => {
